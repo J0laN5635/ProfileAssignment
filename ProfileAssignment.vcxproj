@@ -147,11 +147,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Leaderboard.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ProfileAssignment.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game.h" />
     <ClInclude Include="Leaderboard.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
