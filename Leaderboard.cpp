@@ -1,4 +1,7 @@
 #include "Leaderboard.h"
+#include <iostream>
+
+using namespace std;
 
 Leaderboard::Leaderboard(unsigned int _maxPlayers)
 	: maxPlayers(_maxPlayers), playersInUse(0)
@@ -19,4 +22,16 @@ Leaderboard::Leaderboard(unsigned int _maxPlayers)
 Leaderboard::~Leaderboard()
 {
 	delete[] playerList;
+} 
+
+void Leaderboard::Draw()
+{
+	cout << "-=-=-=-=-=-=-=-=-=-" << endl;
+	cout << "    Leaderboard" << endl;
+	cout << "-=-=-=-=-=-=-=-=-=-" << endl;
+
+	for (unsigned int i = 0; i < playersInUse; i++)
+	{
+		playerList[1].Draw();
+	}
 }

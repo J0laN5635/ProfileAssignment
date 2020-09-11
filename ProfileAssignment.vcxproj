@@ -150,12 +150,14 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Leaderboard.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerDatabase.cpp" />
     <ClCompile Include="ProfileAssignment.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="Leaderboard.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerDatabase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

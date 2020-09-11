@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "Leaderboard.h"
+#include "PlayerDatabase.h"
 
 using namespace std;
 
@@ -13,7 +13,8 @@ int main()
     cout << "    Player List" << endl;
     cout << "-=-=-=-=-=-=-=-=-=-" << endl;
 
-    Leaderboard leaderboard;
+    PlayerDatabase playerDatabase;
+    playerDatabase.Run();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

@@ -1,6 +1,8 @@
 #pragma once
 #include "Player.h"
 
+using namespace std;
+
 class Leaderboard
 {
 public:
@@ -8,6 +10,8 @@ public:
 	//Defines Max capatcity of leaderboard
 	Leaderboard(unsigned int maxPlayers = 10);
 	~Leaderboard();
+
+	void Draw();
 
 private:
 	Player* playerList = nullptr;
