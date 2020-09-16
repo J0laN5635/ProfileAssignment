@@ -2,6 +2,7 @@
 #include <iostream>
 #include "stdlib.h"
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -23,16 +24,16 @@ bool PlayerDatabase::IsGameRunning()
 
 void PlayerDatabase::Update()
 {
-	MenuOption menuOption = getMenuOption();
+	string menuOption = getMenuOption();
 
-	switch (menuOption)
+	if (menuOption == "n")
 	{
-	case MenuOption::NewPlayer:
-			break;
+		cout << "New Player" << endl;
+	}
 
-	case MenuOption::Quit:
+	else if (menuOption == "q")
+	{
 		isGameRunning = false;
-		break;
 	}
 
 }
@@ -48,16 +49,17 @@ void PlayerDatabase::displayerMenu()
 {
 }
 
-PlayerDatabase::MenuOption PlayerDatabase::getMenuOption()
+string PlayerDatabase::getMenuOption()
 {
 	cout << "-=- Menu -=-" << endl;
-	cout << "[1]: Exit" << endl;
+	cout << "Q)uit" << endl;
 
 	string userInput;
 	cin.ignore(cin.rdbuf()->in_avail()); // clear pending input
 	cin >> userInput;
 
-	//Tutorial 1:25:37
+	transform(userInput.begin(), userInput.end(), userInput.begin(), ::tolower);
 
+	return userInput;
 
 }

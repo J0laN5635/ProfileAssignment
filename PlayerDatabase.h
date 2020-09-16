@@ -1,6 +1,7 @@
 #pragma once
 #include "Game.h"
 #include "Leaderboard.h"
+#include <string>
 
 class PlayerDatabase:
 	public Game
@@ -17,17 +18,12 @@ protected:
 	virtual void Draw() override;
 
 private:
-	enum class MenuOption
-	{
-		Quit,
-		NewPlayer
-	};
-
 	bool isGameRunning = true;
+
 	Leaderboard leaderboard;
 
 	void displayerMenu();
-	MenuOption getMenuOption();
+	string getMenuOption();
 
 };
 
