@@ -10,6 +10,18 @@ using namespace std;
 void PlayerDatabase::Init()
 {
 	//Load the leaderboard from file
+
+	try
+	{
+		leaderboard.AddPlayer("Joel", 300);
+		leaderboard.AddPlayer("Zaydan", 190);
+		leaderboard.AddPlayer("Paul", 2);
+	}
+	catch (exception & err)
+	{
+		cout << "Error" << err.what() << "Press any key to continue" << endl;
+		getchar();
+	}
 }
 
 void PlayerDatabase::Shutdown()
@@ -19,16 +31,21 @@ void PlayerDatabase::Shutdown()
 
 bool PlayerDatabase::IsGameRunning()
 {
-	return false;
+	return isGameRunning;
 }
 
 void PlayerDatabase::Update()
 {
 	string menuOption = getMenuOption();
 
-	if (menuOption == "n")
+	if (menuOption == "a")
 	{
-		cout << "New Player" << endl;
+		addNewPlayer();
+	}
+
+	else if (menuOption == "c")
+	{
+		leaderboard.Clear();
 	}
 
 	else if (menuOption == "q")
@@ -45,15 +62,18 @@ void PlayerDatabase::Draw()
 	leaderboard.Draw();
 }
 
-void PlayerDatabase::displayerMenu()
+void PlayerDatabase::displayMenu()
 {
+	cout << endl << "-=- Main Menu -=-" << endl;
+	cout << "A)dd Player" << endl;
+	cout << "C)lear Leaderboard" << endl;
+	cout << "Q)uit" << endl;
+	cout << "-=-=-=-=-=-=-=-=-" << endl;
+	cout << "> ";
 }
 
 string PlayerDatabase::getMenuOption()
 {
-	cout << "-=- Menu -=-" << endl;
-	cout << "Q)uit" << endl;
-
 	string userInput;
 	cin.ignore(cin.rdbuf()->in_avail()); // clear pending input
 	cin >> userInput;
@@ -62,4 +82,23 @@ string PlayerDatabase::getMenuOption()
 
 	return userInput;
 
+	//Tutorial 1:01 May 22
+}
+
+void PlayerDatabase::addNewPlayer()
+{
+	if (!leaderboard.IsFull())
+	{
+		Player p;
+		if (p.LoadFromConsole())
+		{
+			leaderboard.AddPlayer(p);
+		}
+	}
+
+	else
+	{
+		cout << "Leaderboard is full." << endl;
+		getchar();
+	}
 }

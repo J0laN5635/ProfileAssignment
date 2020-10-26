@@ -14,3 +14,21 @@ void Player::Draw()
 {
 	cout << name << ": " << highScore << endl;
 }
+
+bool Player::LoadFromConsole()
+{
+	cin.ignore(cin.rdbuf()->in_avail()); // Clear Pending Input
+	
+	cout << "Enter Player Name> ";
+	cin >> name;
+	cout << "Enter Player Score> ";
+	cin >> highScore;
+
+	if (highScore > MaxScore)
+		highScore = MaxScore;
+
+	return true;
+
+	// Tutorial May 22nd 2:08:50
+}
+

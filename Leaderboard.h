@@ -1,5 +1,6 @@
 #pragma once
 #include "Player.h"
+#include <string>
 
 using namespace std;
 
@@ -11,7 +12,17 @@ public:
 	Leaderboard(unsigned int maxPlayers = 10);
 	~Leaderboard();
 
+	bool IsEmpty() const { return (playersInUse == 0); }
+	bool IsFull() const { return (playersInUse >= maxPlayers); }
+	unsigned int size() const { return playersInUse; }
+	unsigned int capacity() const { return maxPlayers; }
+
 	void Draw();
+	void AddPlayer(const string &name, unsigned int score);
+	void AddPlayer(const Player& player);
+	void Clear();
+
+
 
 private:
 	Player* playerList = nullptr;

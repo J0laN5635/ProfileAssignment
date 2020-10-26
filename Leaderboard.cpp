@@ -30,8 +30,39 @@ void Leaderboard::Draw()
 	cout << "    Leaderboard" << endl;
 	cout << "-=-=-=-=-=-=-=-=-=-" << endl;
 
-	for (unsigned int i = 0; i < playersInUse; i++)
+	if (!IsEmpty())
 	{
-		playerList[1].Draw();
+		for (unsigned int i = 0; i < playersInUse; i++)
+		{
+			playerList[i].Draw();
+		}
 	}
+	else
+	{
+		cout << "... Empty ..." << endl;
+	}
+	//tutorial 1:40:40 may 22
+}
+
+void Leaderboard::AddPlayer(const string &name, unsigned int score)
+{
+	AddPlayer(Player(name.c_str(), score));
+}
+
+void Leaderboard::AddPlayer(const Player & player)
+{
+	if (playersInUse < maxPlayers)
+	{
+		playerList[playersInUse] = player;
+		playersInUse++;
+	}
+	else
+	{
+		throw exception("Out of bounds. Leaderboard full.");
+	}
+}
+
+void Leaderboard::Clear()
+{
+	playersInUse = 0;
 }

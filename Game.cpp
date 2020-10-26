@@ -1,8 +1,10 @@
 #include "Game.h"
+#include "Leaderboard.h"
+
 Game::Game()
 {
 
-}
+};
 
 void Game::Run()
 {
@@ -10,8 +12,8 @@ void Game::Run()
 	
 	while (IsGameRunning())
 	{
-		Update();
 		Draw();
+		Update();
 	}
 
 	Shutdown();
