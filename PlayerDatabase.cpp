@@ -3,6 +3,7 @@
 #include "stdlib.h"
 #include <string>
 #include <algorithm>
+#include "iostreamutils.h"
 
 using namespace std;
 
@@ -16,6 +17,10 @@ void PlayerDatabase::Init()
 		leaderboard.AddPlayer("Joel", 300);
 		leaderboard.AddPlayer("Zaydan", 190);
 		leaderboard.AddPlayer("Paul", 2);
+
+		//Sorts leaderboard by highscore
+		leaderboard.sortLeaderboardbyscore();
+
 	}
 	catch (exception & err)
 	{
@@ -36,11 +41,22 @@ bool PlayerDatabase::IsGameRunning()
 
 void PlayerDatabase::Update()
 {
+	displayMenu();
 	string menuOption = getMenuOption();
 
 	if (menuOption == "a")
 	{
 		addNewPlayer();
+	}
+
+	else if (menuOption == "m")
+	{
+		modifyPlayerByName();
+	}
+
+	else if (menuOption == "n")
+	{
+		leaderboard.sortByName();
 	}
 
 	else if (menuOption == "c")
@@ -65,9 +81,11 @@ void PlayerDatabase::Draw()
 void PlayerDatabase::displayMenu()
 {
 	cout << endl << "-=- Main Menu -=-" << endl;
-	cout << "A)dd Player" << endl;
-	cout << "C)lear Leaderboard" << endl;
-	cout << "Q)uit" << endl;
+	cout << "(A)dd Player" << endl;
+	cout << "(M)odify by name" << endl;
+	cout << "Sort by (N)ame" << endl;
+	cout << "(C)lear Leaderboard" << endl;
+	cout << "(Q)uit" << endl;
 	cout << "-=-=-=-=-=-=-=-=-" << endl;
 	cout << "> ";
 }
@@ -75,14 +93,13 @@ void PlayerDatabase::displayMenu()
 string PlayerDatabase::getMenuOption()
 {
 	string userInput;
-	cin.ignore(cin.rdbuf()->in_avail()); // clear pending input
+	cinclear(); // clear pending input & errir fkags
 	cin >> userInput;
 
 	transform(userInput.begin(), userInput.end(), userInput.begin(), ::tolower);
 
 	return userInput;
 
-	//Tutorial 1:01 May 22
 }
 
 void PlayerDatabase::addNewPlayer()
@@ -93,6 +110,8 @@ void PlayerDatabase::addNewPlayer()
 		if (p.LoadFromConsole())
 		{
 			leaderboard.AddPlayer(p);
+
+			leaderboard.sortLeaderboardbyscore();
 		}
 	}
 
@@ -102,3 +121,44 @@ void PlayerDatabase::addNewPlayer()
 		getchar();
 	}
 }
+
+void PlayerDatabase::modifyPlayerByIndex()
+{
+	cinclear();
+	cout << "Enter index of player to modify> ";
+	
+	unsigned int pos = 0;
+	unsigned int input;
+	cin >> input;
+	pos = input - 1;
+
+	if (pos < leaderboard.PlayersInUse())
+	{
+		leaderboard[pos].LoadFromConsole();
+		leaderboard.sortLeaderboardbyscore();
+	}
+
+}
+
+void PlayerDatabase::modifyPlayerByName()
+{
+	cinclear();
+	cout << "Enter Name of Player to modify>";
+	string name;
+	cin >> name;
+
+	//Ask leaderbaord to binary search and return pos in array
+	unsigned int pos = 0;
+
+	if (leaderboard.Search(name, pos))
+	{
+		//Update the player data
+		leaderboard[pos].LoadFromConsole();
+
+		//Sort Players by highscore
+		leaderboard.sortLeaderboardbyscore();
+	}
+
+}
+
+

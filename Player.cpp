@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <string.h>
 #include <iostream>
+#include "iostreamutils.h"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ void Player::Draw()
 
 bool Player::LoadFromConsole()
 {
-	cin.ignore(cin.rdbuf()->in_avail()); // Clear Pending Input
+	cinclear(); // Clear Pending Input and error flags
 	
 	cout << "Enter Player Name> ";
 	cin >> name;
@@ -29,6 +30,11 @@ bool Player::LoadFromConsole()
 
 	return true;
 
-	// Tutorial May 22nd 2:08:50
+
+}
+
+bool Player::operator<(const Player& other) const
+{
+	return (highScore < other.highScore);
 }
 

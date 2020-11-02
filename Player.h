@@ -9,8 +9,14 @@ public:
 
 	Player(const char* _name = "", unsigned int highscore =0);
 
+	unsigned int GetHighScore() const { return highScore; }
+	const char* GetName() const { return name; }
+
 	void Draw();
 	bool LoadFromConsole();
+
+	//Compare by highscore
+	bool operator<(const Player& other) const;
 
 private:
 	char name[MaxNameLength] = {};

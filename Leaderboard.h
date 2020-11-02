@@ -14,13 +14,32 @@ public:
 
 	bool IsEmpty() const { return (playersInUse == 0); }
 	bool IsFull() const { return (playersInUse >= maxPlayers); }
+
+	unsigned int PlayersInUse() const { return playersInUse; }
+	unsigned int MaxPlayers() const { return maxPlayers; }
+
 	unsigned int size() const { return playersInUse; }
 	unsigned int capacity() const { return maxPlayers; }
+
+	Player& GetPlayer(unsigned int index) const { return playerList[index]; }
 
 	void Draw();
 	void AddPlayer(const string &name, unsigned int score);
 	void AddPlayer(const Player& player);
 	void Clear();
+
+	Player& operator[](unsigned int pos);
+
+	//return iterators to basic array
+	const Player* begin() const { return playerList; }
+	const Player* end() const { return playerList + playersInUse; }
+
+	void sortLeaderboardbyscore();
+	void sortByName();
+
+	//Binary Search the collection & returns true on success and updates pos to reflect position
+	//returns false if not found
+	bool Search(const string& name, unsigned int& posFound);
 
 
 
